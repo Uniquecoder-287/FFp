@@ -1,0 +1,20 @@
+* {
+    margin-top: 4px;
+}
+
+body {
+    /* Sky Breeze Background */
+    background: linear-gradient(135deg, #AECBFA, #D2E0FF);
+}
+
+#year li a {
+    text-decoration: none;
+}
+
+.hidden-list {
+    display: none;
+}
+
+.visible-list {
+    display: block;
+}
