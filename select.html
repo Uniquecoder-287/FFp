@@ -1,128 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Nunito:wght@800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="select.css">
-    <link rel="stylesheet" href="select.js">
-    </head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Select Year & Branch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="select.css" />
+</head>
 <body>
-   <h1>Select your educational year:</h1>
-   <!-- <ul id="year">
-    <li style="font-size: larger;"><a href="#">B.Tech-FE</a></li>
-    <li style="font-size: larger;"><a href="#">B.Tech-SE</a></li>
-    <li style="font-size: larger;"><a href="#">B.Tech-TE</a></li>
-    <li style="font-size: larger;"><a href="#">B.Tech-Final Year</a></li>
-   </ul> -->
-   <!-- <select name="" id="myselect">
-    <option value="list1">B.Tech-FE</option>
-    <option value="list2">B.Tech-SE</option>
-    <option value="list3">B.Tech-TE</option>
-    <option value="list4">B.Tech-Final Year</option>
-   </select>
-   <ul id="list1" class="hidden-list">
-       <li>AIML</li>
-       <li>CSE</li>
-       <li>IT</li>
-   </ul>
-   <ul id="list2" class="hidden-list">
-    <li>AIML</li>
-    <li>CSE</li>
-    <li>IT</li>
-</ul>
-<ul id="list3" class="hidden-list">
-    <li>AIML</li>
-    <li>CSE</li>
-    <li>IT</li>
-</ul>
-<ul id="list4" class="hidden-list">
-    <li>AIML</li>
-    <li>CSE</li>
-    <li>IT</li>
-</ul> -->
-<style>
-    .options {
-      display: none;
-    }
-  
-    input[type="radio"] {
-      display: none;
-    }
-  
-    label {
-      cursor: pointer;
-      padding: 8px;
-      display: inline-block;
-      background: #ccc;
-      margin-right: 10px;
-    }
-  
-    #option1:checked ~ ul li.option1,
-    #option2:checked ~ ul li.option2,
-    #option3:checked ~ ul li.option3,
-    #option4:checked ~ ul li.option4 {
-      display: list-item;
-    }
-  
-    ul li {
-      display: none;
-    }
-  </style>
-  
-  <!-- Radio buttons as fake select options -->
-  <input type="radio" name="options" id="option1" checked>
-  <label for="option1">B.Tech FE</label>
-  
-  <input type="radio" name="options" id="option2">
-  <label for="option2">B.Tech SE</label>
-  
-  <input type="radio" name="options" id="option3">
-  <label for="option3">B.Tech TE</label>
+  <main class="card" role="main" aria-label="Select educational year">
+    <h1 class="title">Select your educational year</h1>
+    <p class="subtitle">Choose the current year, then pick the department to continue to the feedback form.</p>
 
-  <input type="radio" name="options" id="option4">
-  <label for="option4">B.Tech Final Year</label>
-  
-  <!-- The linked list -->
-  <ul>
-    <li class="option1">AIML</li>
-    <li class="option1">CSE</li>
-    <li class="option1">IT</li>
-    <li class="option1">Mech</li>
-    <li class="option1">ENTC</li>
-    <li class="option1">EE</li>
-    <li class="option1">Civil</li>
+    <section class="row">
+      <div class="panel" aria-labelledby="year-head">
+        <h3 id="year-head">Year</h3>
+        <div class="year-grid">
+          <button class="pill is-primary" data-year="FE">B.Tech FE</button>
+          <button class="pill" data-year="SE">B.Tech SE</button>
+          <button class="pill" data-year="TE">B.Tech TE</button>
+          <button class="pill" data-year="BE">B.Tech Final Year</button>
+        </div>
+      </div>
 
-    <li class="option2">AIML</li>
-    <li class="option2">CSE</li>
-    <li class="option2">IT</li>
-    <li class="option2">Mech</li>
-    <li class="option2">ENTC</li>
-    <li class="option2">EE</li>
-    <li class="option2">Civil</li>
+      <div class="panel" aria-labelledby="dept-head">
+        <h3 id="dept-head">Departments</h3>
+        <ul class="dept-list" id="deptList">
+          <li class="dept-item" data-dept="AIML"><span class="dot"></span><span>AIML</span></li>
+          <li class="dept-item" data-dept="CSE"><span class="dot"></span><span>CSE</span></li>
+          <li class="dept-item" data-dept="IT"><span class="dot"></span><span>IT</span></li>
+          <li class="dept-item" data-dept="MECH"><span class="dot"></span><span>Mech</span></li>
+          <li class="dept-item" data-dept="ENTC"><span class="dot"></span><span>ENTC</span></li>
+          <li class="dept-item" data-dept="EE"><span class="dot"></span><span>EE</span></li>
+          <li class="dept-item" data-dept="CIVIL"><span class="dot"></span><span>Civil</span></li>
+        </ul>
+      </div>
+    </section>
 
-    <li class="option3">AIML</li>
-    <li class="option3">CSE</li>
-    <li class="option3">IT</li>
-    <li class="option3">Mech</li>
-    <li class="option3">ENTC</li>
-    <li class="option3">EE</li>
-    <li class="option3">Civil</li>
+    <div class="footer">
+      <button class="btn" id="continueBtn" disabled>Continue</button>
+      <button class="btn secondary" id="resetBtn">Reset</button>
+    </div>
+    <p style="text-align:center;margin-top:10px;"><a class="reset" href="index.html">Back to home</a></p>
+  </main>
 
-    <li class="option4">AIML</li>
-    <li class="option4">CSE</li>
-    <li class="option4">IT</li>
-    <li class="option4">Mech</li>
-    <li class="option4">ENTC</li>
-    <li class="option4">EE</li>
-    <li class="option4">Civil</li>
-
-  </ul>
-  
-
+  <script src="select.js"></script>
 </body>
 </html>
