@@ -192,3 +192,10 @@ a.reset {
     text-decoration: none;
     font-size: 13px;
 }
+
+/* small screens */
+@media (max-width:520px) {
+    .cta {
+        flex-wrap: wrap
+    }
+}
