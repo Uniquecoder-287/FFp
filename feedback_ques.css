@@ -1,0 +1,212 @@
+:root {
+    --page-bg-start: #e7f0ff;
+    --page-bg-end: #d8e6ff;
+    --card: #f5f9ff;
+    --text: #0f172a;
+    --muted: #475569;
+    --border: #e6eefb;
+    --ring: #7cc4ff;
+
+    --primary: #22c55e;
+    --primary-600: #16a34a;
+    --primary-glow: 0 10px 20px rgba(34, 197, 94, .25);
+
+    --radius-card: 22px;
+    --radius-field: 14px;
+
+    --s1: 4px;
+    --s2: 8px;
+    --s3: 12px;
+    --s4: 16px;
+    --s5: 20px;
+    --s6: 24px;
+    --s8: 32px;
+    --s10: 40px;
+    --s12: 48px;
+    --h1: clamp(26px, 3.2vw, 36px);
+    --h2: clamp(18px, 2.2vw, 24px);
+    --label: 14px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    line-height: 1.5;
+    background: radial-gradient(1200px 800px at 20% 0%, var(--page-bg-start) 0%, var(--page-bg-end) 60%, #d6e3ff 100%);
+}
+
+.container {
+    width: min(1100px, 92vw);
+    margin-inline: auto
+}
+
+.site-header {
+    text-align: center;
+    padding: clamp(var(--s8), 5vw, var(--s12)) 0 var(--s6);
+}
+
+.brand {
+    margin: 0;
+    font-size: var(--h1);
+    font-weight: 800;
+    letter-spacing: .3px;
+    text-shadow: 0 2px 0 rgba(255, 255, 255, .6);
+}
+
+.site-main {
+    padding-bottom: var(--s12)
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    box-shadow: 0 12px 30px rgba(21, 94, 239, 0.06), 0 4px 10px rgba(15, 23, 42, 0.05);
+    padding: clamp(var(--s8), 4vw, var(--s12));
+}
+
+.card__header {
+    margin-bottom: var(--s6)
+}
+
+.card__title {
+    font-size: var(--h2);
+    margin: 0 0 var(--s1)
+}
+
+.card__subtitle {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--label)
+}
+
+/* Form layout */
+#ratings_form {
+    display: grid;
+    gap: var(--s6)
+}
+
+.question {
+    display: grid;
+    gap: var(--s3);
+    padding: var(--s4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-field);
+    background: #ffffff;
+}
+
+@media (min-width: 760px) {
+    .question {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: center
+    }
+}
+
+.question-text {
+    font-size: 16px;
+    margin: 0
+}
+
+/* Ratings as pill radios */
+.ratings {
+    display: flex;
+    gap: var(--s3);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ratings label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s2);
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #f9fbff;
+    cursor: pointer;
+    transition: background .2s, border-color .2s, box-shadow .2s, transform .04s;
+}
+
+.ratings input[type="radio"] {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #94a3b8;
+    /* slate-400 */
+    outline: none;
+    margin: 0;
+    display: inline-block;
+    position: relative;
+}
+
+.ratings input[type="radio"]:checked {
+    border-color: var(--primary);
+    background: radial-gradient(circle at 50% 50%, var(--primary) 0 45%, transparent 46% 100%);
+}
+
+.ratings label:hover {
+    background: #f3f7ff
+}
+
+/* Keyboard focus */
+.ratings input[type="radio"]:focus-visible {
+    box-shadow: 0 0 0 4px rgba(124, 196, 255, .35);
+}
+
+/* Actions */
+.form-actions {
+    display: flex;
+    gap: var(--s4);
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: var(--s2);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn {
+    font: inherit;
+    border: 0;
+    border-radius: 999px;
+    padding: var(--s4) var(--s8);
+    cursor: pointer;
+    transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.btn-primary {
+    color: #fff;
+    background: linear-gradient(180deg, var(--primary), var(--primary-600));
+    box-shadow: var(--primary-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px)
+}
+
+.btn-primary:active {
+    transform: translateY(0)
+}
+
+.btn-ghost {
+    color: var(--muted);
+    background: #ffffff;
+    border: 1px solid var(--border);
+}
+
+.btn-ghost:hover {
+    background: #f7fbff
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Nunito:wght@800;900&display=swap"
+        rel="stylesheet">
+    <title>SY AIML Feedback Form</title>
+    <link rel="stylesheet" href="select_teacher.css" />
+</head>
+
+<body>
+    <div class="header-left">
+        <h1>SY AIML Feedback Form</h1>
+    </div>
+
+    <div class="container">
+        <label for="teacherSelect">Select Staff Name:</label>
+        <select id="teacherSelect" onchange="loadFeedbackForm()">
+            <option value="" selected disabled hidden>-- Select Teacher --</option>
+            <!-- Add more teachers and files here -->
+            <option value="feedback_ques.html">ABC Sir</option>     <!-- Example -->
+            <option value="feedback_ques.html">DEF Ma'am</option>   <!-- Example -->
+            <option value="feedback_ques.html">GHI Sir</option>     <!-- Example -->
+            <option value="feedback_ques.html">JKL Ma'am</option>   <!-- Example -->
+        </select>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary"><a href="feedback_ques.html">Continue</a></button>
+            <button type="reset" class="btn btn-sec">Reset</button>
+            <button class="btn btn-ter"><a href="select.html">Back</a></button>
+            <button id="reset-test" type="button">Reset test data</button>
+        </div>
+
+        <div id="output"></div>
+    </div>
+
+    <script src="select_teacher.js">
+    </script>
+</body>
+
+</html>
