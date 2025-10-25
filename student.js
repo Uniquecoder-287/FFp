@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const inputs = document.querySelectorAll('.inp');        // [PRN, password]
-  const loginBtn = document.querySelectorAll('.cta')[0];   // first button
-  const backBtn  = document.querySelectorAll('.cta')[1];   // second button
-
+  // 1) Cache core elements
+  const inputs    = document.querySelectorAll('.inp');        // [PRN, password]
+  const loginBtn  = document.querySelectorAll('.cta')[0];     // first button
+  const backBtn   = document.querySelectorAll('.cta')[1];     // second button
   const loginLink = loginBtn?.querySelector('a');
   const backLink  = backBtn?.querySelector('a');
 
-  // Prevent the inner anchors from hard-navigating; JS will control routing
+  // 2) Prevent anchors from hard-navigating; JS controls routing
   loginLink?.addEventListener('click', (e) => e.preventDefault());
   backLink?.addEventListener('click',  (e) => e.preventDefault());
 
-  // Keydown support for accessibility
+  // 3) Keyboard accessibility for pseudo-buttons
   [loginBtn, backBtn].forEach(btn => {
     if (!btn) return;
     btn.setAttribute('tabindex','0');
@@ -20,10 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // 4) Input references
   const prnInput  = inputs[0];
   const passInput = inputs[1];
 
-  // Login flow
+  // 5) Login flow
   loginBtn?.addEventListener('click', async (e) => {
     e.preventDefault();
 
@@ -36,16 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Persist PRN locally for downstream pages (e.g., progress association)
+    // Persist PRN for downstream pages
     try { localStorage.setItem('studentPRN', prn); } catch(_) {}
 
     // ============================
     // BACKEND REQUIRED (commented)
     // ============================
-    // 1) Send credentials to your server for authentication.
-    // 2) Server returns:
-    //    { ok: true, completedAll: boolean, remainingCount: number }
-    //    and sets a secure session cookie or returns a JWT.
     /*
     try {
       const res = await fetch('/api/auth/login', {
@@ -67,20 +64,17 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.assign('index.html');
         return;
       }
-      // If not completed, go to select to continue
       window.location.assign('select.html');
       return;
     } catch (err) {
-      // Network or server error
       alert('Network error. Please try again.');
       return;
     }
     */
 
-    // ===========================================
+    // =============================================
     // Client-side fallback (until backend exists)
-    // ===========================================
-    // Progress is inferred using localStorage.teacherList and completedTeachers.
+    // =============================================
     const teacherList = getTeacherList();
     const done = new Set(getCompletedTeachers());
     const remaining = teacherList.filter(t => !done.has((t || '').trim()));
@@ -93,13 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Back flow
+  // 6) Back flow
   backBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     window.location.assign('index.html');
   });
 
-  // Helpers
+  // 7) Helpers
   function getTeacherList() {
     try {
       const list = JSON.parse(localStorage.getItem('teacherList') || '[]');

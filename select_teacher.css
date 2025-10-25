@@ -112,6 +112,10 @@ body {
     appearance: none;
 }
 
+.cta {
+    text-size-adjust: 70%;
+}
+
 #teacherSelect:hover {
     background: #fcfeff;
 }
@@ -142,12 +146,18 @@ a {
 }
 
 .btn {
+    height: 50px;
+    width:50%;
     font: inherit;
-    border: 0;
+    border: 0.5px;
     border-radius: 999px;
     padding: var(--s4) var(--s8);
     cursor: pointer;
     transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+}
+
+#reset-test {
+    
 }
 
 .btn-primary {
@@ -163,6 +173,7 @@ a {
 .btn-primary:active {
     transform: translateY(0)
 }
+
 .btn-sec {
     color: #fff;
     background: linear-gradient(180deg, var(--primary), var(--primary-600));
@@ -176,6 +187,7 @@ a {
 .btn-primary:active {
     transform: translateY(0)
 }
+
 .btn-ter {
     color: #fff;
     background: linear-gradient(180deg, var(--primary), var(--primary-600));
@@ -191,8 +203,8 @@ a {
 }
 
 /* Make the card breathe on small screens */
-@media (max-width: 700px) {
-    .container {
-        padding: var(--s8)
+@media (max-width: 520px) {
+    .cta {
+        padding: var(--s8) flex-wrap: wrap
     }
 }

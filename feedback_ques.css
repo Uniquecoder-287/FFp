@@ -46,7 +46,7 @@ body {
 }
 
 .container {
-    width: min(1100px, 92vw);
+    width: min(900px, 92vw);
     margin-inline: auto
 }
 
@@ -179,9 +179,14 @@ a {
 }
 
 .btn {
+    height: 45px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font: inherit;
     border: 0;
-    border-radius: 999px;
+    border-radius: 50px;
     padding: var(--s4) var(--s8);
     cursor: pointer;
     transition: transform .06s ease, box-shadow .2s ease, background .2s ease;

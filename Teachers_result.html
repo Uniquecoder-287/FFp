@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Result</title>
+</head>
+<body>
+  <h1>Average Rating:</h1>
+  <p id="avg-rating"></p>
+
+  <script>
+    const avgRating = localStorage.getItem('avgRating');
+    document.getElementById('avg-rating').innerHTML = `Average Rating : ${avgRating}%`;
+  </script>
+</body>
+</html>

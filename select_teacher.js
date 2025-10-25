@@ -1,58 +1,76 @@
+// select_teacher.js
+
 document.addEventListener('DOMContentLoaded', () => {
-  const selectEl = document.getElementById('teacherSelect');
+  // ---- 1) Cache key DOM elements up front
+  const selectEl    = document.getElementById('teacherSelect');
+  const continueBtn = document.getElementById('continueBtn');
+  const resetBtn    = document.getElementById('resetBtn');
+  const backBtn     = document.getElementById('backBtn');
 
-  const actions = document.querySelector('.form-actions');
-  const continueBtn = actions?.querySelector('.btn.btn-primary');
-  const resetBtn    = actions?.querySelector('.btn.btn-sec');
-  const backBtn     = actions?.querySelector('.btn.btn-ter');
-
-  // Disable default anchor behavior inside the buttons
+  // ---- 2) Neutralize anchors inside buttons (avoid accidental navigation)
+  // Buttons contain <a> tags for markup convenience; prevent their default action so
+  // JS can fully control navigation and validation.
   [continueBtn, backBtn].forEach(btn => {
     const a = btn?.querySelector('a');
     if (a) a.addEventListener('click', (e) => e.preventDefault());
   });
 
-  // Optional: initialize the full teacher list once (labels from the select)
-  const labels = Array.from(selectEl.options)
-    .map(o => o.text?.trim())
-    .filter(t => t && !t.startsWith('--'));
-  if (labels.length) {
-    try { localStorage.setItem('teacherList', JSON.stringify(labels)); } catch(_) {}
+  // ---- 3) Optional: snapshot teacher labels into localStorage once
+  // Helps other pages retrieve the full list without DOM coupling.
+  if (selectEl) {
+    const labels = Array.from(selectEl.options)
+      .map(o => o.text?.trim())
+      .filter(t => t && !t.startsWith('--'));
+    if (labels.length) {
+      try { localStorage.setItem('teacherList', JSON.stringify(labels)); } catch(_) {}
+    }
   }
 
+  // ---- 4) Continue: validate selection → persist label → navigate
   continueBtn?.addEventListener('click', (e) => {
     e.preventDefault();
-    const idx = selectEl.selectedIndex;
-    const opt = selectEl.options[idx];
-    const href = opt?.value || 'feedback_ques.html';
-    const label = opt?.text?.trim();
+    e.stopPropagation();
 
-    if (!label) {
+    // Guard: ensure a real teacher is selected (index 0 is the placeholder)
+    if (!selectEl || selectEl.selectedIndex <= 0 || selectEl.value === "") {
       alert('Please select a teacher first.');
-      selectEl.focus();
+      selectEl?.focus();
       return;
     }
 
-    // Save the label for feedback_ques.html to read
+    // Persist the human-readable label so feedback_ques.html can show it
+    const label = selectEl.options[selectEl.selectedIndex].text.trim();
+    const href  = selectEl.value || 'feedback_ques.html';
     try { localStorage.setItem('selectedTeacherLabel', label); } catch(_) {}
 
-    // Navigate to the feedback page (value points to feedback_ques.html)
+    // Navigate to the selected feedback page (value points to feedback_ques.html)
     window.location.assign(href);
   });
 
+  // ---- 5) Reset: restore placeholder option and clear saved label
+  // Using explicit JS for predictable behavior (no form wrapper required).
   resetBtn?.addEventListener('click', (e) => {
-    // Native reset sets select back to first option; also clear the saved label
-    setTimeout(() => {
-      try { localStorage.removeItem('selectedTeacherLabel'); } catch(_) {}
-    }, 0);
+    e.preventDefault();               // avoid native reset ambiguity
+    if (!selectEl) return;
+
+    // Send the select back to the first option: "-- Select Teacher --"
+    selectEl.selectedIndex = 0;
+
+    // Remove any previously saved selection so downstream pages don't read stale data
+    try { localStorage.removeItem('selectedTeacherLabel'); } catch(_) {}
+
+    // UX nicety: focus back on the select so users can choose again immediately
+    selectEl.focus();
   });
 
+  // ---- 6) Back: return to the selector menu
   backBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     window.location.assign('select.html');
   });
 
-  // Optional dev helper for your “Reset test data” button
+  // ---- 7) TEMP reset data code (dev helper) — safe to delete later
+  // Clears common test keys and shows a quick confirmation.
   document.getElementById('reset-test')?.addEventListener('click', () => {
     try {
       ['completedTeachers','feedbackHistory','selectedTeacherLabel'].forEach(k => localStorage.removeItem(k));

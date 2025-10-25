@@ -12,7 +12,8 @@ body {
 
 /* ---------- Outer frame (glass card) ---------- */
 .frame {
-  max-width: 1120px;
+  /* max-width: 1120px; */
+  width: min(900px, 92vw);
   margin: 28px auto;
   padding: 28px 28px 36px;
   background: rgba(255,255,255,0.65);

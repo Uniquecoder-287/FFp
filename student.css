@@ -6,7 +6,6 @@
 }
 
 body {
-  /* background-image: url('/background.jpg'); */
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -22,7 +21,7 @@ body {
 }
 
 .login-container {
-  width: 500px;
+  width: min(500px, 92vw);
   background: transparent;
   padding: 80px;
   border-radius: 10px;
@@ -69,10 +68,11 @@ body {
 }
 
 button {
-  height: 50px;
+  height: 45px;
   width: 40%;
   padding: 12px;
-  border-color: rgba(0, 0, 0, 0.35);
+  /* border-color: rgba(0, 0, 0, 0.35); */
+  border: 0;
   box-shadow: 0 8px 24px rgba(22, 186, 99, .35);
   border-radius: 25px;
   background: #16BA63;
@@ -82,6 +82,10 @@ button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+}
+
+.cta {
+  text-size-adjust: 70%;
 }
 
 button:active {
